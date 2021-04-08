@@ -1,5 +1,5 @@
 #!/bin/bash
-ssh -t -t -i ~/.ssh/id_rsa ubuntu@35.176.144.11 << EOF
+ssh -t -t -i ~/id_rsa ubuntu@35.176.144.11 << EOF
 
 
 sudo rm -r PracticalProject

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ssh -tt ubuntu@35.176.144.1 << EOF
+ssh -tt ubuntu@3.10.180.60 << EOF
 
 docker push ThomGlynn/front_end:latest
 docker push ThomGlynn/back_end:latest

@@ -1,5 +1,5 @@
 #!/bin/bash
-ssh ubuntu@35.176.144.11 << EOF
+ssh -tt ubuntu@35.176.144.11 << EOF
 
 
 sudo rm -r PracticalProject

@@ -6,6 +6,10 @@ pipeline {
                 sh 'bash ss-test.sh'
             }
         }
-        
+        stage('Build Docker images'){
+            steps{
+                sh 'bash push-to-docker.sh'
+            }
+        }   
     }
 }

@@ -1,105 +1,71 @@
-# QAC SFIA2 Project
+# Cloud Native Practical Project
 
-This application is a simple [Flask application](https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application), ready to be deployed, for your SFIA2 project.
+## Links:
 
-The following information should be everything you need to complete the project.
+- Jira Board - [Jira Board](https://fundementalproject1.atlassian.net/secure/RapidBoard.jspa?projectKey=PP&rapidView=2)
+- Github - [Github Repo](https://github.com/Thom-Glynn/PracticalProject)
 
 ## Brief
 
-The application must:
+The second project in the QA Cloud Native Engineer course was to create a completed CI Pipeline with accompanying documentation. The CI 
+Pipeline needs to be successfully deployed with the application provided. Demonstration of said CI Pipeline 
 
-- Be deployed to a **Virtual Machine for testing**
-- Be deployed in a **managed Kubernetes Cluster for production**
-- Make use of a **managed Database solution**
+The application must: 
+- A Jira board with full expansion on tasks needed to complete the project.
+- This could also provide a record of any issues or risks that you faced creating your project.
+- The application must be deployed using containerisation and orchestration tools.
+- The application must be tested through the CI pipeline.
+- The project must make use of two managed Database Servers: 1 for Testing and 1 for Production.
+- If a change is made to the code base, Webhooks should be used so that Jenkins recreates and redeploys the changed application.
+- The infrastructure for the project should be configured using an infrastructure management tool (Infrastructure as Code).
+- As part of the project, you need to create an Ansible Playbook that will provision the environment that your CI Server needs to run.
+- The project must make use of a reverse proxy to make your application accessible to the user.
 
-## Application
+## Architecture
 
-The application is a Flask application running in **2 micro-services** (*frontend* and *backend*).  
+Depiced below is a diagram of the infrastructre of the CI pipeline.
 
-The database directory is available should you: 
-  - want to use a MySQL container for your database at any point, *or*
-  - want to make use of the `Create.sql` file to **set up and pre-populate your database**.
+![infrastrucre diagram](https://i.imgur.com/ftVxCIp.png)
 
-The application works by:
-1. The frontend service making a GET request to the backend service. 
-2. The backend service using a database connection to query the database and return a result.
-3. The frontend service serving up a simple HTML (`index.html`) to display the result.
+In the diagram Terraform provisions the RDS databases, the EC2 Virtual Machines and the kubernetes cluster. 
+The EC2's provisioned with Terraform will have their resources configured putting onto them the infrastrucure
+needed for testing. One of the EC2's named Jenkins_VM will be responsible for being the CI server of the pipeline,
+keeping a log of all changes and updates from the repoistory.
 
-### Database Connection
+## JIRA board
 
-The database connection is handled in the `./backend/application/__init__.py` file.
-
-A typical Database URI follows the form:
-
-```
-mysql+pymysql://[db-user]:[db-password]@[db-host]/[db-name]
-```
-
-An example of this would be:
-
-```
-mysql+pymysql://root:password@mysql:3306/orders
-```
-
-### Environment Variables
-
-The application makes use of **2 environment variables**:
-
-- `DATABASE_URI`: as described above
-- `SECRET_KEY`: any *random string* will work here
-
-### Running a Flask Application
-
-Typically, to run a Flask application, you would:
-
-1. Install the pip dependencies:
-
-```
-pip install -r requirements.txt
-```
-
-2. Run the application:
-
-```
-python3 app.py
-```
-
-![app-diagram](https://i.imgur.com/wnbDazy.png)
+A screenshot of my Jira board is below: 
+![Jira Board](https://i.imgur.com/yQLcxrr.png)
 
 ## Testing
 
-Unit Tests have been included for both the frontend and backend services.
+The scripts were set up so that a test report was written to a seperate document that could be accessed from the console.
+Unfortunately I was not able to get Jenkins running and therefor a succsessful test was never performed.
 
-To test the backend service, you will need two things:
+![Unsuccessful Tests](https://i.imgur.com/0URS7YP.png)
 
-1. A database called `testdb`
-2. A `TEST_DATABASE_URI` environment variable, which contains the database connection for the `testdb` database.
 
-You can run the tests using the command:
+## Automated Development
 
-```
-pytest
-```
+Using Terraform, I was able to provision hardware resources in concurrance with AWS infrastructure automatically. Ansible 
+is then used to automatically install a list of programs; Docker, Docker-Compose, python-3, mysql-client, python-pytest,
+aws-cli and Jenkins.
 
-To generate a coverage report, you will need to run:
+## Manual Development
 
-```
-pytest --cov application
-```
+After deployment the manual steps needed are outlined below: 
 
-## Infrastructure
+- Adding to the Ansible inventory with the new Jenkins and Test IP.
+- SSH into the Jenkins VM and producing a new key pair with ssh-keygen
+- login into jenkins using the initial admin password saved in /home/jenkins/.jenkins/secrets/initialAdminPassword
+- SSH into the test VM and add jenkins key pair to the authorised keys list
+- Logging into Jenkins using the initial admin password and the public IP:8080
+- Setting up the jenkins pipeline and linking to PracticalProject in the pipeline
 
-The **Minimum Viable Product** for this project should at least demonstrate the following infrastructure diagram:
+## Acknowledgmenets
 
-![mvp-diagram](https://i.imgur.com/i5qfOas.png)
+I'd like to acknowledge Jay Grindrod, Reece Elder, Nathan Forester, Harry Volkner and all other cohorts who assited me.
 
-**Stretch goals** for this project include:
+## Author
 
-- Using **Terraform to configure the Kubernetes Cluster** for production 
-- Using **Terraform and Ansible to configure the Test VM**
-
-Completing the stretch goals should yield an infrastructure diagram similar to the following:
-
-![stretch-digram](https://i.imgur.com/Q5zljVl.png)
-
-**Good luck!**
+Thomas Glynn

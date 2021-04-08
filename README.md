@@ -35,6 +35,7 @@ keeping a log of all changes and updates from the repoistory.
 ## JIRA board
 
 A screenshot of my Jira board is below: 
+
 ![Jira Board](https://i.imgur.com/yQLcxrr.png)
 
 ## Testing

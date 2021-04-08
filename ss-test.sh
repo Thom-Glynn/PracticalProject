@@ -1,5 +1,5 @@
 #!/bin/bash
-ssh -t -t -i /home/ubuntu/.ssh/id_rsa ubuntu@35.176.144.11 << EOF
+ssh -o StrictHostKeyChecking=no ubuntu@35.176.144.11 << EOF
 
 
 sudo rm -r PracticalProject

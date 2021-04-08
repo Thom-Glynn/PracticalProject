@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'python ./backend/app.py'
+                sh 'bash ss-test.sh'
             }
         }
         stage('Test') {

@@ -1,5 +1,5 @@
 #!/bin/bash
-ssh -i /home/jenkins/.ssh/id_rsa ubuntu@18.130.192.45 << EOF
+ssh -i /home/jenkins/.ssh/id_rsa ubuntu@18.134.196.180 << EOF
 sudo rm -r PracticalProject
 git clone https://github.com/Thom-Glynn/PracticalProject.git
 cd PracticalProject/

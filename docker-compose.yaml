@@ -1,0 +1,23 @@
+version: "3.7"
+services: 
+ backend:
+   image: ThomGlynn/backend:latest
+   build: ./backend
+   container_name: backendcontainer
+   enviroment: 
+     DATABASE_URI='mysql+pymysql://admin:password@practical-production.cmzoexi9knny.eu-west-2.rds.amazonaws.com/users'
+     TEST_DATABASE_URI='mysql+pymysql://admin:password@practical-test.cmzoexi9knny.eu-west-2.rds.amazonaws.com/testdb'
+     SECRET_KEY='jklvohdskjhfdsdkjlfhgv12354'
+   ports:
+   - target: 5001
+     published: 5001
+     protocol: tcp
+    
+  frontend:
+    image: ThomGlynn/frontend:latest
+    build: ./frontend
+    container_name: frontendcontainer
+    ports:
+    - target: 5000
+      published: 5000
+      protocol: tcp

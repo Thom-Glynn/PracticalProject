@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: installing programs
+      script: /home/ubuntu/scripts/others_install.sh
+
+    - name: install docker
+      script: /home/ubuntu/scripts/docker_install.sh
+
+    - name: install docker_compose
+      script: /home/ubuntu/scripts/docker_compose.sh
+
+
+- hosts: jenkins_VM
+  become: true
+  tasks:
+    - name: install jenkins
+      script: /home/ubuntu/scripts/jenkins_install.sh
+
+    - name: install Kubernetes
+      script: /home/ubuntu/scripts/kubernetes_install.sh
+
+    - name: install aws_cli
+      script: /home/ubuntu/scripts/aws_cli.sh
+
+    
